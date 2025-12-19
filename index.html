@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RIGOL DS1000Z-E Benutzerhandbuch - DS1102Z-E / DS1202Z-E</title>
+<meta name="description" content="Vollstaendiges deutsches Benutzerhandbuch fuer das RIGOL DS1000Z-E Digitalspeicher-Oszilloskop. Detaillierte Anleitungen fuer alle Funktionen.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0066cc;--primary-dark:#004a99;--secondary:#ff6600;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--success:#22c55e;--warning:#f59e0b;--danger:#ef4444;--sidebar:320px;--header:70px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.header{position:fixed;top:0;left:0;right:0;height:var(--header);background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.1)}
+.header h1{font-size:1.5rem}
+.header span{font-size:.85rem;opacity:.9;background:rgba(255,255,255,.2);padding:.25rem .75rem;border-radius:20px;margin-left:1rem}
+.search-box{flex:1;max-width:500px;margin:0 2rem;position:relative}
+.search-box input{width:100%;padding:.75rem 1rem .75rem 2.5rem;border:none;border-radius:10px;font-size:1rem}
+.search-box input:focus{outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+.search-box svg{position:absolute;left:.75rem;top:50%;transform:translateY(-50%);color:var(--muted)}
+.menu-btn{display:none;background:rgba(255,255,255,.2);border:none;color:#fff;font-size:1.5rem;padding:.5rem;border-radius:8px;cursor:pointer}
+.sidebar{position:fixed;left:0;top:var(--header);bottom:0;width:var(--sidebar);background:var(--card);border-right:1px solid var(--border);overflow-y:auto;padding:1.5rem 0;z-index:900;transition:transform .3s}
+.nav-title{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:1rem 1.5rem .5rem;font-weight:600}
+.nav-link{display:flex;align-items:center;gap:.75rem;padding:.75rem 1.5rem;color:var(--text);text-decoration:none;font-size:.9rem;border-left:3px solid transparent;transition:all .2s}
+.nav-link:hover{background:var(--bg);color:var(--primary)}
+.nav-link.active{background:rgba(0,102,204,.08);color:var(--primary);border-left-color:var(--primary);font-weight:500}
+.nav-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;background:var(--bg);border-radius:6px;font-size:.8rem}
+main{margin-left:var(--sidebar);margin-top:var(--header);padding:2rem 3rem;min-height:calc(100vh - var(--header))}
+.section{background:var(--card);border-radius:16px;padding:2.5rem;margin-bottom:2rem;box-shadow:0 1px 3px rgba(0,0,0,.05);border:1px solid var(--border)}
+.section-head{display:flex;align-items:center;gap:1rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid var(--bg)}
+.section-num{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.25rem}
+.section-title h2{font-size:1.75rem;margin-bottom:.25rem}
+.section-title p{color:var(--muted);font-size:.9rem}
+h3{font-size:1.4rem;margin:2rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+h4{font-size:1.15rem;margin:1.5rem 0 .75rem}
+h5{font-size:1rem;color:var(--primary);margin:1.25rem 0 .5rem}
+p{margin-bottom:1rem}
+ul,ol{margin:1rem 0 1rem 1.5rem}
+li{margin-bottom:.5rem}
+.info{padding:1.25rem;border-radius:12px;margin:1.5rem 0;display:flex;gap:1rem}
+.info-icon{font-size:1.5rem}
+.info h5{margin:0 0 .5rem;font-size:.9rem;text-transform:uppercase;letter-spacing:.05em}
+.info p{margin:0;font-size:.95rem}
+.info.tip{background:linear-gradient(135deg,#e0f2fe,#f0f9ff);border-left:4px solid var(--primary)}
+.info.tip h5{color:var(--primary)}
+.info.warn{background:linear-gradient(135deg,#fef3c7,#fffbeb);border-left:4px solid var(--warning)}
+.info.warn h5{color:var(--warning)}
+.info.danger{background:linear-gradient(135deg,#fee2e2,#fef2f2);border-left:4px solid var(--danger)}
+.info.danger h5{color:var(--danger)}
+.tbl{overflow-x:auto;margin:1.5rem 0;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:1rem;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--bg);font-weight:600}
+tr:hover td{background:rgba(0,102,204,.03)}
+code{font-family:monospace;background:var(--bg);padding:.2rem .5rem;border-radius:4px;font-size:.85em;color:var(--primary)}
+kbd{display:inline-block;background:linear-gradient(180deg,#fafafa,#e5e5e5);border:1px solid #d0d0d0;border-radius:5px;padding:.2rem .6rem;font-family:monospace;font-size:.85em;box-shadow:0 2px 0 #c0c0c0;margin:0 .1rem}
+.steps{counter-reset:step;list-style:none;margin:1.5rem 0;padding:0}
+.steps li{position:relative;padding-left:3.5rem;margin-bottom:1.5rem;counter-increment:step}
+.steps li::before{content:counter(step);position:absolute;left:0;top:0;width:2.5rem;height:2.5rem;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.steps li h5{margin:0 0 .5rem;color:var(--text)}
+.img-placeholder{background:linear-gradient(135deg,#f1f5f9,#e2e8f0);border:2px dashed var(--border);border-radius:12px;padding:3rem 2rem;text-align:center;margin:1.5rem 0;color:var(--muted)}
+.img-placeholder .icon{font-size:3rem;margin-bottom:1rem;display:block;opacity:.5}
+.img-placeholder small{display:block;margin-top:.5rem;font-size:.8rem;opacity:.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin:2rem 0}
+.card{background:var(--bg);border-radius:12px;padding:1.5rem;border:1px solid var(--border);transition:all .3s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.08)}
+.card .icon{width:48px;height:48px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;margin-bottom:1rem}
+.card h4{margin:0 0 .5rem;font-size:1rem}
+.card p{margin:0;font-size:.9rem;color:var(--muted)}
+.spec-list{list-style:none;margin:1rem 0;padding:0}
+.spec-list li{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.spec-list li:last-child{border-bottom:none}
+.spec-list li::before{content:"✓";color:var(--success);font-weight:700}
+.back-top{position:fixed;bottom:2rem;right:2rem;width:50px;height:50px;background:var(--primary);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:1.25rem;display:none;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,102,204,.4);z-index:800}
+.back-top.show{display:flex}
+.progress{position:fixed;top:var(--header);left:0;right:0;height:3px;z-index:999}
+.progress div{height:100%;background:linear-gradient(90deg,var(--secondary),#ff8533);width:0%;transition:width .1s}
+@media(max-width:1024px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}main{margin-left:0;padding:1.5rem}.menu-btn{display:block}.header{padding:0 1rem}.search-box{margin:0 1rem}.header span{display:none}}
+@media(max-width:768px){.section{padding:1.5rem}.section-head{flex-direction:column;align-items:flex-start}.grid{grid-template-columns:1fr}.search-box{display:none}}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:850}
+.overlay.active{display:block}
+.search-results{position:absolute;top:100%;left:0;right:0;background:#fff;border-radius:10px;margin-top:.5rem;box-shadow:0 10px 40px rgba(0,0,0,.2);max-height:400px;overflow-y:auto;display:none;z-index:1001}
+.search-results.active{display:block}
+.search-item{padding:1rem;border-bottom:1px solid var(--border);cursor:pointer}
+.search-item:hover{background:var(--bg)}
+.search-item h4{font-size:.9rem;color:var(--primary);margin-bottom:.25rem}
+.search-item p{font-size:.8rem;color:var(--muted);margin:0}
+</style>
+</head>
+<body>
+<div class="progress"><div id="prog"></div></div>
+<header class="header">
+<div style="display:flex;align-items:center">
+<button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
+<h1>RIGOL DS1000Z-E</h1>
+<span>Benutzerhandbuch</span>
+</div>
+<div class="search-box">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+<input type="text" id="search" placeholder="Suche nach Funktionen..." oninput="doSearch(this.value)">
+<div class="search-results" id="searchRes"></div>
+</div>
+</header>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<nav class="sidebar" id="sidebar">
+<div class="nav-title">Uebersicht</div>
+<a href="#intro" class="nav-link active"><span class="nav-icon">&#127968;</span>Einfuehrung</a>
+<a href="#sicherheit" class="nav-link"><span class="nav-icon">&#9888;</span>Sicherheit</a>
+<div class="nav-title">Kapitel</div>
+<a href="#kap1" class="nav-link"><span class="nav-icon">1</span>Kurzanleitung</a>
+<a href="#kap2" class="nav-link"><span class="nav-icon">2</span>Vertikalsystem</a>
+<a href="#kap3" class="nav-link"><span class="nav-icon">3</span>Horizontalsystem</a>
+<a href="#kap4" class="nav-link"><span class="nav-icon">4</span>Abtastsystem</a>
+<a href="#kap5" class="nav-link"><span class="nav-icon">5</span>Triggersystem</a>
+<a href="#kap6" class="nav-link"><span class="nav-icon">6</span>Messungen</a>
+<a href="#kap7" class="nav-link"><span class="nav-icon">7</span>Dekodierung</a>
+<a href="#kap8" class="nav-link"><span class="nav-icon">8</span>Referenz</a>
+<a href="#kap9" class="nav-link"><span class="nav-icon">9</span>Pass/Fail</a>
+<a href="#kap10" class="nav-link"><span class="nav-icon">10</span>Aufzeichnung</a>
+<a href="#kap11" class="nav-link"><span class="nav-icon">11</span>Display</a>
+<a href="#kap12" class="nav-link"><span class="nav-icon">12</span>Speichern</a>
+<a href="#kap13" class="nav-link"><span class="nav-icon">13</span>System</a>
+<a href="#kap14" class="nav-link"><span class="nav-icon">14</span>Fernsteuerung</a>
+<a href="#kap15" class="nav-link"><span class="nav-icon">15</span>Fehlersuche</a>
+<a href="#kap16" class="nav-link"><span class="nav-icon">16</span>Spezifikationen</a>
+<div class="nav-title">Anhang</div>
+<a href="#zubehoer" class="nav-link"><span class="nav-icon">&#128230;</span>Zubehoer</a>
+</nav>
+<main>
+
+<!-- Einfuehrung -->
+<section class="section" id="intro">
+<div class="section-head">
+<div class="section-num">&#127968;</div>
+<div class="section-title"><h2>RIGOL DS1000Z-E Serie</h2><p>Digitalspeicher-Oszilloskop DS1102Z-E / DS1202Z-E</p></div>
+</div>
+<p>Willkommen zum vollstaendigen Benutzerhandbuch der <strong>RIGOL DS1000Z-E Serie</strong>. Diese Anleitung deckt alle Funktionen der Oszilloskope DS1102Z-E und DS1202Z-E ab.</p>
+
+<div class="grid">
+<div class="card"><div class="icon">&#128200;</div><h4>100/200 MHz Bandbreite</h4><p>DS1102Z-E: 100 MHz, DS1202Z-E: 200 MHz</p></div>
+<div class="card"><div class="icon">&#9889;</div><h4>1 GSa/s Abtastrate</h4><p>Maximale Echtzeit-Abtastrate</p></div>
+<div class="card"><div class="icon">&#128190;</div><h4>24 Mpts Speichertiefe</h4><p>Tiefe Speicherkapazitaet</p></div>
+<div class="card"><div class="icon">&#127919;</div><h4>15 Triggerarten</h4><p>Umfangreiche Triggerfunktionen</p></div>
+<div class="card"><div class="icon">&#128200;</div><h4>37 Messparameter</h4><p>Automatische Messungen</p></div>
+<div class="card"><div class="icon">&#128268;</div><h4>LXI-C kompatibel</h4><p>USB, LAN und GPIB Schnittstellen</p></div>
+</div>
+
+<h3>Hauptmerkmale</h3>
+<ul class="spec-list">
+<li>2 analoge Eingaenge mit 100 MHz (DS1102Z-E) bzw. 200 MHz (DS1202Z-E) Bandbreite</li>
+<li>UltraVision-Technologie fuer hervorragende Signaldarstellung</li>
+<li>Bis zu 30.000 wfms/s Signalerfassungsrate</li>
+<li>Bis zu 60.000 Frames fuer Echtzeit-Signalaufzeichnung (optional)</li>
+<li>Mehrstufige Graustufenanzeige</li>
+<li>1 mV/div bis 10 V/div vertikaler Dynamikbereich</li>
+<li>7.0 Zoll WVGA (800x480) TFT LCD Display</li>
+<li>Parallel-Dekodierung und serielle Dekodierungsoptionen</li>
+<li>Standard-FFT-Funktion</li>
+<li>Pass/Fail Testfunktion</li>
+</ul>
+
+<h3>Modelluebersicht</h3>
+<div class="tbl"><table>
+<tr><th>Modell</th><th>Bandbreite</th><th>Kanaele</th><th>Abtastrate</th><th>Speichertiefe</th></tr>
+<tr><td><strong>DS1102Z-E</strong></td><td>100 MHz</td><td>2</td><td>1 GSa/s</td><td>24 Mpts</td></tr>
+<tr><td><strong>DS1202Z-E</strong></td><td>200 MHz</td><td>2</td><td>1 GSa/s</td><td>24 Mpts</td></tr>
+</table></div>
+</section>
+
+<!-- Sicherheit -->
+<section class="section" id="sicherheit">
+<div class="section-head">
+<div class="section-num">&#9888;</div>
+<div class="section-title"><h2>Sicherheitsanforderungen</h2><p>Wichtige Sicherheitshinweise vor Inbetriebnahme</p></div>
+</div>
+
+<div class="info danger">
+<span class="info-icon">&#9888;</span>
+<div><h5>Warnung</h5><p>Bitte lesen Sie die folgenden Sicherheitshinweise sorgfaeltig, bevor Sie das Geraet in Betrieb nehmen.</p></div>
+</div>
+
+<h3>Allgemeine Sicherheitsanforderungen</h3>
+<h4>Netzkabel und Stromversorgung</h4>
+<ul>
+<li><strong>Ordnungsgemaesses Netzkabel verwenden:</strong> Nur fuer das Geraet vorgesehene Netzkabel benutzen.</li>
+<li><strong>Geraet erden:</strong> Das Geraet ist ueber den Schutzleiter im Netzkabel geerdet.</li>
+<li><strong>Ueberspannungsschutz:</strong> Keine Ueberspannung (z.B. Gewitter) an das Geraet gelangen lassen.</li>
+</ul>
+
+<h4>Tastkopfanschluss</h4>
+<div class="info warn">
+<span class="info-icon">&#9889;</span>
+<div><h5>Achtung</h5><p>Die Masseleitung des Tastkopfes ist mit Erdpotential verbunden. Schliessen Sie die Masseleitung nicht an eine hoehere Spannung an.</p></div>
+</div>
+
+<h4>Betriebshinweise</h4>
+<ul>
+<li>Nicht ohne Gehaeuse betreiben</li>
+<li>Nur spezifizierte Sicherungen verwenden</li>
+<li>Keine blanken Verbindungen beruehren</li>
+<li>Ausreichende Belueftung sicherstellen</li>
+</ul>
+
+<h3>Messkategorie</h3>
+<p>Die DS1000Z-E Serie ist fuer Messungen der <strong>Kategorie 1 (CAT I)</strong> zugelassen.</p>
+<div class="tbl"><table>
+<tr><th>Kategorie</th><th>Beschreibung</th><th>Beispiele</th></tr>
+<tr><td><strong>CAT I</strong></td><td>Messungen ohne direkte Netzverbindung</td><td>Batteriebetriebene Geraete, PKW-Elektrik</td></tr>
+<tr><td>CAT II</td><td>Direkte Steckerverbindung zum Netz</td><td>Haushaltsgeraete</td></tr>
+<tr><td>CAT III</td><td>Gebaudeinstallation</td><td>Unterverteilung</td></tr>
+<tr><td>CAT IV</td><td>Quelle der Niederspannungsinstallation</td><td>Zaehler, Hauptanschluss</td></tr>
+</table></div>
+
+<h3>Arbeitsumgebung</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>Betrieb</th><th>Lagerung</th></tr>
+<tr><td>Temperatur</td><td>0 bis +50 Grad C</td><td>-40 bis +70 Grad C</td></tr>
+<tr><td>Luftfeuchtigkeit (0-30 Grad C)</td><td>kleiner 95% rel.</td><td>-</td></tr>
+<tr><td>Einsatzhoehe</td><td>kleiner 3 km</td><td>kleiner 15 km</td></tr>
+</table></div>
+</section>
+
+<!-- Kapitel 1: Kurzanleitung -->
+<section class="section" id="kap1">
+<div class="section-head">
+<div class="section-num">1</div>
+<div class="section-title"><h2>Kurzanleitung</h2><p>Erste Schritte mit dem DS1000Z-E Oszilloskop</p></div>
+</div>
+
+<h3>Allgemeine Ueberpruefung</h3>
+<ol class="steps">
+<li><h5>Transportverpackung pruefen</h5><p>Bei Beschaedigungen der Verpackung diese aufbewahren bis Vollstaendigkeitspruefung abgeschlossen.</p></li>
+<li><h5>Geraet ueberpruefen</h5><p>Bei Defekten wenden Sie sich an Ihren RIGOL Vertrieb.</p></li>
+<li><h5>Zubehoer ueberpruefen</h5><p>Zubehoer anhand des Packzettels pruefen.</p></li>
+</ol>
+
+<h3>Vorbereitung fuer den Einsatz</h3>
+<h4>Aufstellfuesse einstellen</h4>
+<p>Das DS1000Z-E hat ausklappbare Aufstellfuesse fuer ergonomisches Arbeiten.</p>
+<div class="img-placeholder"><span class="icon">&#128247;</span><p>Bild: Einstellen der Aufstellfuesse</p><small>Hier Screenshot einfuegen</small></div>
+
+<h4>Stromversorgung anschliessen</h4>
+<p>Betrieb mit: <strong>100 bis 240V, 45Hz bis 440Hz</strong></p>
+<div class="img-placeholder"><span class="icon">&#128247;</span><p>Bild: Anschluss Stromversorgung</p><small>Hier Screenshot einfuegen</small></div>
+
+<h4>Einschalt-Funktionstest</h4>
+<ol class="steps">
+<li><h5>Oszilloskop einschalten</h5><p>Taste <kbd>Power</kbd> in der linken unteren Ecke druecken.</p></li>
+<li><h5>Selbsttest abwarten</h5><p>Nach den Selbsttests erscheint die Startseite.</p></li>
+</ol>
+
+<h3>Tastkopf anschliessen</h3>
+<div class="tbl"><table>
+<tr><th>Modell</th><th>Beschreibung</th></tr>
+<tr><td><strong>RP3300</strong></td><td>350 MHz passive Tastkopfe (Standard)</td></tr>
+<tr><td><strong>RP3500A</strong></td><td>500 MHz passive Tastkopfe (Optional)</td></tr>
+</table></div>
+
+<h4>Anschluss des Tastkopfs</h4>
+<ol class="steps">
+<li><h5>BNC-Stecker verbinden</h5><p>Tastkopf mit BNC-Eingangsbuchse verbinden.</p></li>
+<li><h5>Masse anschliessen</h5><p>Masse-Krokodilklemme mit Masseanschluss verbinden.</p></li>
+<li><h5>Messpunkt verbinden</h5><p>Tastkopfspitze mit Messpunkt verbinden.</p></li>
+</ol>
+
+<h3>Tastkopf Funktionspruefung</h3>
+<ol class="steps">
+<li><h5>Standardeinstellungen</h5><p><kbd>Storage</kbd> dann <code>Default</code> druecken.</p></li>
+<li><h5>Masse-Krokodilklemme</h5><p>Mit Masseklemme des Kompensationssignals verbinden.</p></li>
+<li><h5>Tastkopfspitze</h5><p>Mit Ausgangsklemme des Kompensationssignals verbinden.</p></li>
+<li><h5>AUTO druecken</h5><p>Taste <kbd>AUTO</kbd> druecken.</p></li>
+<li><h5>Signalform beobachten</h5><p>Es sollte ein Rechtecksignal erscheinen.</p></li>
+</ol>
+<div class="img-placeholder"><span class="icon">&#128247;</span><p>Bild: Rechteckspannung bei korrekter Kompensation</p><small>Hier Screenshot einfuegen</small></div>
+
+<div class="info tip">
+<span class="info-icon">&#128161;</span>
+<div><h5>Hinweis</h5><p>Das Tastkopfkompensationssignal ist nur fuer die Tastkopfkompensation geeignet, nicht zur Kalibrierung.</p></div>
+</div>
+
+<h3>Tastkopfkompensation</h3>
+<div class="grid">
+<div class="card"><h4>Ueberkompensiert</h4><p>Signal zeigt ueberschwingende Ecken - Kompensation reduzieren</p></div>
+<div class="card"><h4>Richtig kompensiert</h4><p>Saubere rechteckige Ecken - Einstellung optimal</p></div>
+<div class="card"><h4>Unterkompensiert</h4><p>Signal zeigt abgerundete Ecken - Kompensation erhoehen</p></div>
+</div>
+
+<h3>Bedienfeld Uebersicht</h3>
+<div class="img-placeholder"><span class="icon">&#128247;</span><p>Bild: Bedienfeld Uebersicht</p><small>Hier Screenshot einfuegen</small></div>
+<div class="tbl"><table>
+<tr><th>Nr.</th><th>Bezeichnung</th><th>Nr.</th><th>Bezeichnung</th></tr>
+<tr><td>1</td><td>Menu Tasten</td><td>10</td><td>Hilfe und Druck</td></tr>
+<tr><td>2</td><td>LCD</td><td>11</td><td>Power-Taste</td></tr>
+<tr><td>3</td><td>Funktionstasten</td><td>12</td><td>USB HOST</td></tr>
+<tr><td>4</td><td>Multi-Funktionsknopf</td><td>13</td><td>Analog-Eingangskanaele</td></tr>
+<tr><td>5</td><td>Operationstasten</td><td>14</td><td>VERTICAL Bereich</td></tr>
+<tr><td>6</td><td>CLEAR</td><td>15</td><td>HORIZONTAL Bereich</td></tr>
+<tr><td>7</td><td>AUTO</td><td>16</td><td>Externer Trigger</td></tr>
+<tr><td>8</td><td>RUN/STOP</td><td>17</td><td>TRIGGER Bereich</td></tr>
+<tr><td>9</td><td>SINGLE</td><td>18</td><td>Kompensationssignal</td></tr>
+</table></div>
+
+<h3>Rueckseite Uebersicht</h3>
+<div class="img-placeholder"><span class="icon">&#128247;</span><p>Bild: Rueckseite</p><small>Hier Screenshot einfuegen</small></div>
+<ul>
+<li><strong>Handgriff:</strong> Nach oben ziehen zum Transportieren</li>
+<li><strong>LAN:</strong> Fernsteuerung ueber Netzwerk (LXI-C)</li>
+<li><strong>USB DEVICE:</strong> PC oder Drucker Verbindung</li>
+<li><strong>Trigger Out / Pass/Fail:</strong> BNC-Ausgang</li>
+<li><strong>Sicherheitsschloss:</strong> Kensington-Schloss moeglich</li>
+<li><strong>Sicherung:</strong> 250V, T2A</li>
+<li><strong>Netzanschlussdose:</strong> 100-240V, 45-440Hz</li>
+</ul>
+
+<h3>Bedienelemente</h3>
+<h4>Vertikaleinstellung (VERTICAL)</h4>
+<ul>
+<li><kbd>CH1</kbd>, <kbd>CH2</kbd>: Analogkanaele aktivieren/deaktivieren</li>
+<li><kbd>MATH</kbd>: Mathematische Signaloperationen</li>
+<li><kbd>REF</kbd>: Referenzsignal aktivieren</li>
+<li><strong>POSITION Knopf:</strong> Vertikale Position aendern</li>
+<li><strong>SCALE Knopf:</strong> Vertikale Skalierung aendern</li>
+</ul>
+
+<h4>Horizontaleinstellung (HORIZONTAL)</h4>
+<ul>
+<li><strong>POSITION Knopf:</strong> Horizontale Position / Triggerposition</li>
+<li><kbd>MENU</kbd>: Horizontal-Einstellmenu oeffnen</li>
+<li><strong>SCALE Knopf:</strong> Zeitbasiseinstellung</li>
+</ul>
+
+<h4>Triggereinstellung (TRIGGER)</h4>
+<ul>
+<li><kbd>MODE</kbd>: Auto, Normal oder Single Triggermodus</li>
+<li><strong>LEVEL Knopf:</strong> Triggerpegel einstellen</li>
+<li><kbd>MENU</kbd>: Trigger-Bedienmenu</li>
+<li><kbd>FORCE</kbd>: Triggerzwang</li>
+</ul>
+
+<h4>Weitere wichtige Tasten</h4>
+<ul>
+<li><kbd>CLEAR</kbd>: Alle Signale auf dem Bildschirm loeschen</li>
+<li><kbd>RUN/STOP</kbd>: Signalerfassung starten/stoppen (gelb=RUN, rot=STOP)</li>
+<li><kbd>SINGLE</kbd>: Einzeltrigger-Modus</li>
+<li><kbd>AUTO</kbd>: Automatische Signaleinstellung</li>
+</ul>
+
+<h3>Benutzeroberflaecha</h3>
+<div class="img-placeholder"><span class="icon">&#128247;</span><p>Bild: Benutzeroberflaeche</p><small>Hier Screenshot einfuegen</small></div>
+
+<h4>Bildschirmelemente</h4>
+<ul>
+<li><strong>Auto Messparameter:</strong> 20 horizontale und 17 vertikale Messparameter</li>
+<li><strong>Statusanzeige:</strong> RUN, STOP, T-D, WAIT, AUTO</li>
+<li><strong>Horizontale Zeitablenkung:</strong> Zeit pro Rastereinheit</li>
+<li><strong>Abtastrate/Speichertiefe:</strong> Aktuelle Erfassungsrate</li>
+<li><strong>Signalspeicher:</strong> Position des Bildschirmsignals im Speicher</li>
+<li><strong>Trigger-Informationen:</strong> Art, Quelle und Pegel</li>
+<li><strong>Kanalskalierung:</strong> Spannungswert pro Vertikalskalenteil</li>
+</ul>
+
+<h3>Integrierte Hilfe-Funktion</h3>
+<p>Die integrierte Hilfe-Funktion stellt kontextbezogene Hilfetexte fuer alle Tasten zur Verfuegung.</p>
+<p><strong>Bedienung:</strong> Taste <kbd>Help</kbd> druecken zum Oeffnen/Schliessen</p>
+</section>
+
+<!-- Kapitel 2: Vertikalsystem -->
+<section class="section" id="kap2">
+<div class="section-head">
+<div class="section-num">2</div>
+<div class="section-title"><h2>Bedienung Vertikalsystem</h2><p>Eingangskanal-Einstellungen und vertikale Skalierung</p></div>
+</div>
+
+<p>Das DS1000Z-E besitzt 2 Eingangskanaele (CH1 und CH2), die unabhaengig voneinander eingestellt werden koennen.</p>
+
+<h3>Eingangskanal aktivieren</h3>
+<p>Schliessen Sie ein Signal an Kanal 1 an und druecken Sie <kbd>CH1</kbd> im Bedienfeld VERTICAL.</p>
+<div class="info tip">
+<span class="info-icon">&#128161;</span>
+<div><h5>Bildschirmanzeige</h5><p>Das Kanaleinstellmenu erscheint rechts, das Kanalsymbol unten am Bildschirm.</p></div>
+</div>
+
+<h3>Eingangskopplung</h3>
+<p>Waehlen Sie die optimale Eingangskopplung fuer Ihr Signal.</p>
+<div class="tbl"><table>
+<tr><th>Kopplung</th><th>Beschreibung</th><th>Anwendung</th></tr>
+<tr><td><strong>DC</strong></td><td>DC- und AC-Anteile werden dargestellt</td><td>Gleichspannungsmessungen</td></tr>
+<tr><td><strong>AC</strong></td><td>DC-Anteile werden unterdrueckt</td><td>Nur Wechselanteile</td></tr>
+<tr><td><strong>GND</strong></td><td>Alle Signalanteile unterdrueckt</td><td>Referenzlinie anzeigen</td></tr>
+</table></div>
+<p><strong>Bedienung:</strong> <kbd>CH1</kbd> dann <code>Kopplung</code> waehlen</p>
+
+<h3>Bandbreitenbegrenzung</h3>
+<p>Bandbreitenbegrenzung reduziert Hochfrequenzrauschen.</p>
+<ul>
+<li><strong>OFF:</strong> Volle Bandbreite (alle Frequenzen)</li>
+<li><strong>20M:</strong> Bandbreite auf 20 MHz begrenzt</li>
+</ul>
+<p><strong>Bedienung:</strong> <kbd>CH1</kbd> dann <code>BW Grenzw.</code></p>
+
+<h3>Tastkopfabschwaechung</h3>
+<p>Daempfungsfaktor manuell einstellen.</p>
+<div class="tbl"><table>
+<tr><th>Menu</th><th>Faktor</th><th>Menu</th><th>Faktor</th></tr>
+<tr><td>0.01X</td><td>1:100</td><td>10X</td><td>10:1</td></tr>
+<tr><td>0.1X</td><td>1:10</td><td>100X</td><td>100:1</td></tr>
+<tr><td>1X</td><td>1:1</td><td>1000X</td><td>1000:1</td></tr>
+</table></div>
+<p><strong>Bedienung:</strong> <kbd>CH1</kbd> dann <code>Verhaeltnis</code></p>
+
+<h3>Signalinvertierung</h3>
+<p>Bei aktivierter Invertierung wird das Signal um 180 Grad gedreht.</p>
+<p><strong>Bedienung:</strong> <kbd>CH1</kbd> dann <code>Invers</code></p>
+
+<h3>Vertikalskalierung</h3>
+<h4>Grobeinstellung</h4>
+<p>Schrittfolge 1-2-5: 1 mV/div dann 2 mV/div dann 5 mV/div dann 10 mV/div usw.</p>
+
+<h4>Feineinstellung</h4>
+<p>Kleinere Schritte fuer hoehere Aufloesung.</p>
+
+<p><strong>Bedienung:</strong></p>
+<ul>
+<li><kbd>CH1</kbd> dann <code>Volts/Div</code> fuer Modusauswahl</li>
+<li><strong>SCALE Knopf</strong> drehen zum Einstellen</li>
+<li><strong>SCALE Knopf</strong> druecken zum schnellen Wechsel Grob/Fein</li>
+</ul>
+
+<h3>Amplituden-Einheit</h3>
+<div class="tbl"><table>
+<tr><th>Einheit</th><th>Beschreibung</th></tr>
+<tr><td><strong>V</strong></td><td>Volt (Standard)</td></tr>
+<tr><td><strong>A</strong></td><td>Ampere</td></tr>
+<tr><td><strong>W</strong></td><td>Watt</td></tr>
+<tr><td><strong>U</strong></td><td>Einheitenlos</td></tr>
+</table></div>
+<p><strong>Bedienung:</strong> <kbd>CH1</kbd> dann <code>Einheit</code></p>
+
+<h3>Kanalmarkierungen</h3>
+<p>Eigene Kanalbezeichnung (max. 4 Zeichen) vergeben.</p>
+<p><strong>Bedienung:</strong> <kbd>CH1</kbd> dann <code>Label</code> dann <code>Anzeige</code> und <code>Label Eingabe</code></p>
+
+<h3>Analog-Kanal-Verzoegerungskalibrierung</h3>
+<p>Kalibrierung der Tastkopfverzoegerung fuer praezise Messungen (-100ns bis +100ns).</p>
+<p><strong>Bedienung:</strong> <kbd>CH1</kbd> dann <code>Verzoeg.Kal.</code></p>
+</section>
+
+<!-- Kapitel 3: Horizontalsystem -->
+<section class="section" id="kap3">
+<div class="section-head">
+<div class="section-num">3</div>
+<div class="section-title"><h2>Bedienung Horizontalsystem</h2><p>Zeitbasis und horizontale Ablenkung</p></div>
+</div>
+
+<h3>Verzoegerte Horizontalablenkung</h3>
+<p>Vergroessert einen Signalausschnitt fuer detailliertere Analyse.</p>
+<p><strong>Bedienung:</strong> <kbd>MENU</kbd> im HORIZONTAL Bereich dann <code>Verzoegert</code></p>
+
+<div class="info warn">
+<span class="info-icon">&#9888;</span>
+<div><h5>Voraussetzung</h5><p>Zeitbasis muss im YT-Modus sein.</p></div>
+</div>
+
+<div class="img-placeholder"><span class="icon">&#128247;</span><p>Bild: Verzoegerte Horizontalablenkung</p><small>Oben: Original, Unten: Vergroesserter Ausschnitt</small></div>
+
+<h4>Bedienung</h4>
+<ul>
+<li><strong>POSITION Knopf:</strong> Bereich verschieben</li>
+<li><strong>SCALE Knopf drehen:</strong> Vergroesserung aendern</li>
+<li><strong>SCALE Knopf druecken:</strong> Ein-/Ausschalten</li>
+</ul>
+
+<h3>Zeitbasis Modi</h3>
+<p><strong>Bedienung:</strong> <kbd>MENU</kbd> im HORIZONTAL Bereich dann <code>Zeitbasis</code></p>
+
+<h4>YT-Modus (Standard)</h4>
+<ul>
+<li>Y-Achse: Amplitude (Spannung)</li>
+<li>X-Achse: Zeit</li>
+</ul>
+<div class="info tip">
+<span class="info-icon">&#128161;</span>
+<div><h5>Slow Sweep</h5><p>Bei Zeitbasis ab 200ms/div wird automatisch der Slow-Sweep-Modus aktiviert.</p></div>
+</div>
+
+<h4>XY-Modus</h4>
+<p>Amplituden-Amplituden-Darstellung fuer Lissajous-Figuren.</p>
+<ul>
+<li>X-Achse: Kanal 1 Spannung</li>
+<li>Y-Achse: Kanal 2 Spannung</li>
+<li>Phasenmessung: theta = arcsin(A/B)</li>
+</ul>
+
+<div class="info warn">
+<span class="info-icon">&#9888;</span>
+<div><h5>Im XY-Modus nicht verfuegbar</h5><p>Auto-Messung, Cursor, Math, Referenz, Verzoegerte Ablenkung, Vektor, Trigger, Speichertiefe, Erfassung, Pass/Fail, Aufzeichnung</p></div>
+</div>
+
+<h4>Roll-Modus</h4>
+<p>Kontinuierliche Darstellung wie auf einem Schreiber.</p>
+<ul>
+<li>Fuer langsame Signale</li>
+<li>Zeitbasis: 200 ms bis 50 s</li>
+<li>Trigger und Positionierung deaktiviert</li>
+</ul>
+</section>
+
+<!-- Kapitel 4: Abtastsystem -->
+<section class="section" id="kap4">
+<div class="section-head">
+<div class="section-num">4</div>
+<div class="section-title"><h2>Bedienung Abtastsystem</h2><p>Erfassungsmodi und Speichertiefe</p></div>
+</div>
+
+<h3>Erfassungs-Modi</h3>
+<p><strong>Bedienung:</strong> <kbd>Acquire</kbd> dann <code>Modus</code></p>
+
+<h4>Normal</h4>
+<p>Gleichmaessige Abtastung des Signals. Optimal fuer die meisten Signalformen.</p>
+
+<h4>Spitzenwert (Peak Detect)</h4>
+<p>Erfasst Minima und Maxima. Ideal fuer:</p>
+<ul>
+<li>Schnelle Signalanderungen</li>
+<li>Glitch-Impulse</li>
+<li>Runt-Impulse</li>
+<li>Stoerimpulse</li>
+</ul>
+<div class="info warn">
+<span class="info-icon">&#9888;</span>
+<div><h5>Beachten</h5><p>Erhoehtes Stoerrauschen in diesem Modus.</p></div>
+</div>
+
+<h4>Mittelwert (Average)</h4>
+<p>Mehrere Erfassungen werden gemittelt. Reduziert unkorreliertes Rauschen.</p>
+<ul>
+<li>Anzahl Erfassungen: 2 bis 1024</li>
+<li>Voraussetzung: Repetierendes Signal</li>
+<li>Je mehr Erfassungen, desto langsamer die Aktualisierung</li>
+</ul>
+
+<h4>Hohe Aufloesung (High Res)</h4>
+<p>Mehrere Abtastungen pro Signalintervall werden gemittelt.</p>
+<ul>
+<li>Geringeres Stoerrauschen</li>
+<li>Verbesserte Aufloesung bei langsamen Signalen</li>
+</ul>
+
+<h3>Sin(x)/x Interpolation</h3>
+<p>Aktiviert die dynamische Sinusinterpolation fuer bessere Signalwiederherstellung.</p>
+<p><strong>Bedienung:</strong> <code>Sin(x)/x</code> ein-/ausschalten</p>
+
+<h3>Abtastrate</h3>
+<p>Maximal 1 GSa/s. Wird beeinflusst durch:</p>
+<ul>
+<li>Hauptzeitbasis (HORIZONTAL SCALE)</li>
+<li>Speichertiefe</li>
+</ul>
+
+<h4>Probleme bei zu niedriger Abtastrate</h4>
+<ul>
+<li><strong>Signalverzerrungen:</strong> Signalanteile gehen verloren</li>
+<li><strong>Aliasing:</strong> Hochfrequente Anteile erscheinen als niedrigere Frequenzen</li>
+<li><strong>Signalverlust:</strong> Ganze Signalanteile verschwinden</li>
+</ul>
+<div class="info tip">
+<span class="info-icon">&#128161;</span>
+<div><h5>Nyquist-Theorem</h5><p>Abtastrate muss mehr als doppelt so hoch sein wie die hoechste Signalfrequenz.</p></div>
+</div>
+
+<h3>Speichertiefe</h3>
+<p>Maximale Speichertiefe: 24 Mpts</p>
+<p><strong>Formel:</strong> Speichertiefe = Abtastrate x Signaldauer</p>
+<p><strong>Bedienung:</strong> <kbd>Acquire</kbd> dann <code>SpeichTief</code></p>
+
+<h4>Verfuegbare Speichertiefen</h4>
+<div class="tbl"><table>
+<tr><th>Einzelkanal</th><th>Mehrkanal</th></tr>
+<tr><td>Auto</td><td>Auto</td></tr>
+<tr><td>12k Points</td><td>6k Points</td></tr>
+<tr><td>120k Points</td><td>60k Points</td></tr>
+<tr><td>1.2M Points</td><td>600k Points</td></tr>
+<tr><td>12M Points</td><td>6M Points</td></tr>
+<tr><td>24M Points</td><td>12M Points</td></tr>
+</table></div>
+
+<h3>Anti-Aliasing</h3>
+<p>Spezieller Algorithmus zur Reduzierung von Aliasing bei niedriger Zeitablenkung.</p>
+<p><strong>Bedienung:</strong> <kbd>Acquire</kbd> dann <code>Anti-Aliasing</code></p>
+</section>
+
+<!-- Kapitel 5: Triggersystem -->
+<section class="section" id="kap5">
+<div class="section-head">
+<div class="section-num">5</div>
+<div class="section-title"><h2>Bedienung Triggersystem</h2><p>Triggermodi, Triggerarten und Einstellungen</p></div>
+</div>
+
+<p>Die Triggerfunktion synchronisiert die horizontale Ablenkung fuer stabile Signaldarstellung.</p>
+
+<h3>Triggerquelle</h3>
+<p>Waehlen Sie die Signalquelle fuer den Trigger:</p>
+<ul>
+<li>CH1, CH2: Analogkanaele</li>
+<li>EXT: Externer Triggereingang</li>
+<li>AC Line: Netzfrequenz</li>
+</ul>
+
+<h3>Triggermodi</h3>
+<p><strong>Bedienung:</strong> <kbd>MODE</kbd> im TRIGGER Bereich</p>
+
+<h4>Auto-Modus</h4>
+<ul>
+<li>Automatischer Trigger wenn kein gueltiges Triggersignal</li>
+<li>Ideal fuer unbekannte Signale</li>
+<li>Statusanzeige: AUTO</li>
+</ul>
+
+<h4>Normal-Modus</h4>
+<ul>
+<li>Trigger nur bei gueltigem Triggersignal</li>
+<li>Wartet auf Triggerbedingung</li>
+<li>Statusanzeige: WAIT oder T-D</li>
+</ul>
+
+<h4>Single-Modus</h4>
+<ul>
+<li>Einzelerfassung bei gueltigem Trigger</li>
+<li>Oszilloskop stoppt nach Erfassung</li>
+<li><kbd>FORCE</kbd> erzwingt Trigger</li>
+</ul>
+
+<h3>Triggerkopplung</h3>
+<div class="tbl"><table>
+<tr><th>Kopplung</th><th>Beschreibung</th></tr>
+<tr><td><strong>DC</strong></td><td>Alle Signalanteile fuer Triggerung</td></tr>
+<tr><td><strong>AC</strong></td><td>DC-Anteile blockiert</td></tr>
+<tr><td><strong>LF Reject</strong></td><td>Niederfrequenz-Anteile blockiert</td></tr>
+<tr><td><strong>HF Reject</strong></td><td>Hochfrequenz-Anteile blockiert</td></tr>
+</table></div>
+
+<h3>Triggersperrzeit (Holdoff)</h3>
+<p>Zeit nach einem Trigger, in der kein neuer Trigger ausgeloest wird.</p>
+<p>Nuetzlich bei komplexen, repetierenden Signalen.</p>
+<p><strong>Bedienung:</strong> <kbd>MENU</kbd> dann <code>Einstellen</code> dann <code>Holdoff</code></p>
+
+<h3>Rauschunterdrueckung</h3>
+<p>Reduziert falsche Trigger durch Rauschen.</p>
+<p><strong>Bedienung:</strong> <kbd>MENU</kbd> dann <code>Einstellen</code> dann <code>NoiseReject</code></p>
+
+<h3>Triggerarten</h3>
+<p><strong>Bedienung:</strong> <kbd>MENU</kbd> im TRIGGER Bereich dann <code>Type</code></p>
+
+<h4>Flanken-Trigger (Edge)</h4>
+<p>Triggert bei Flankenuebergang ueber/unter den Triggerpegel.</p>
+<ul>
+<li>Anstiegsflanke: Signal steigt ueber Pegel</li>
+<li>Abfallflanke: Signal faellt unter Pegel</li>
+<li>Beide: Beide Flankenrichtungen</li>
+</ul>
+
+<h4>Impuls-Trigger (Pulse)</h4>
+<p>Triggert auf Impulse mit bestimmter Breite.</p>
+<ul>
+<li>Groesser als: Pulsbreite groesser als Vergleichswert</li>
+<li>Kleiner als: Pulsbreite kleiner als Vergleichswert</li>
+<li>Zwischen: Pulsbreite in definiertem Bereich</li>
+</ul>
+<p>Einstellbereich: 8 ns bis 10 s</p>
+
+<h4>Flankenzeit-Trigger (Slope)</h4>
+<p>Triggert auf Flanken mit bestimmter Anstiegs-/Abfallzeit.</p>
+<ul>
+<li>Zwei Triggerpegel definieren Messstrecke</li>
+<li>Zeit zwischen den Pegeln wird gemessen</li>
+</ul>
+
+<h4>Video-Trigger</h4>
+<p>Triggert auf Videosignale nach verschiedenen Standards.</p>
+<div class="tbl"><table>
+<tr><th>Standard</th><th>Halbbilder/s</th><th>Zeilen</th></tr>
+<tr><td>NTSC</td><td>60</td><td>525</td></tr>
+<tr><td>PAL</td><td>50</td><td>625</td></tr>
+<tr><td>SECAM</td><td>50</td><td>625</td></tr>
+<tr><td>480P</td><td>60</td><td>525</td></tr>
+<tr><td>576P</td><td>60</td><td>625</td></tr>
+</table></div>
+
+<h4>Muster-Trigger (Pattern)</h4>
+<p>Triggert auf logische Kombination der Kanalpegel.</p>
+<ul>
+<li>H: Pegel hoch</li>
+<li>L: Pegel niedrig</li>
+<li>X: Dont Care (ignoriert)</li>
+<li>Flanke: Ein Kanal kann als Flanke definiert werden</li>
+</ul>
+
+<h4>Impulsbreiten-Dauer-Trigger (Duration)</h4>
+<p>Triggert wenn Eingangsbedingungen fuer bestimmte Zeit erfuellt sind.</p>
+
+<h4>Ablaufzeit-Trigger (Timeout) - Optional</h4>
+<p>Triggert wenn Zeit zwischen Flanken den Timeout ueberschreitet.</p>
+
+<h4>Runt-Trigger - Optional</h4>
+<p>Triggert auf verkuemmerte Impulse, die nicht beide Logikschwellen erreichen.</p>
+
+<h4>Fenster-Trigger (Window) - Optional</h4>
+<p>Triggert wenn Signal den oberen oder unteren Triggerpegel erreicht.</p>
+
+<h4>Verzoegerter Trigger (Delay) - Optional</h4>
+<p>Triggert basierend auf Zeitdifferenz zwischen zwei Signalen.</p>
+
+<h4>Setup/Hold Trigger</h4>
+<p>Triggert bei Verletzung von Setup- oder Hold-Zeit bei synchronen Datensignalen.</p>
+
+<h4>N-Flanken-Trigger (Nth Edge)</h4>
+<p>Triggert auf die n-te Flanke nach einem Idle-Zustand.</p>
+
+<h4>RS232-Trigger</h4>
+<p>Triggert auf RS232 serielle Datenmuster.</p>
+
+<h4>I2C-Trigger - Optional</h4>
+<p>Triggert auf I2C Busbedingungen (Start, Stop, Adresse, Daten).</p>
+
+<h4>SPI-Trigger - Optional</h4>
+<p>Triggert auf SPI Busbedingungen.</p>
+
+<h3>Triggerausgang</h3>
+<p>Der BNC-Ausgang auf der Rueckseite kann als Triggerausgang konfiguriert werden.</p>
+<p>Liefert ein Signal entsprechend der Signalerfassungsrate.</p>
+</section>
+
+<!-- Kapitel 6: Messungen -->
+<section class="section" id="kap6">
+<div class="section-head">
+<div class="section-num">6</div>
+<div class="section-title"><h2>Messungen durchfuehren</h2><p>Mathematik, automatische Messungen und Cursor</p></div>
+</div>
+
+<h3>Mathematikfunktionen</h3>
+<p><strong>Bedienung:</strong> <kbd>MATH</kbd> dann <code>Math</code> dann <code>Ausdruck</code></p>
+
+<h4>Grundoperationen</h4>
+<div class="tbl"><table>
+<tr><th>Operation</th><th>Beschreibung</th></tr>
+<tr><td><strong>A+B</strong></td><td>Addition zweier Kanaele</td></tr>
+<tr><td><strong>A-B</strong></td><td>Subtraktion</td></tr>
+<tr><td><strong>AxB</strong></td><td>Multiplikation</td></tr>
+<tr><td><strong>A/B</strong></td><td>Division</td></tr>
+</table></div>
+
+<h4>FFT (Frequenz-Analyse)</h4>
+<p>Transformiert Zeitsignale in den Frequenzbereich.</p>
+<ul>
+<li>Fenster: Rectangle, Hanning, Hamming, Blackman, Flattop</li>
+<li>Einheit: dB oder Vrms</li>
+<li>Ansicht: Half oder Full</li>
+</ul>
+<div class="info tip">
+<span class="info-icon">&#128161;</span>
+<div><h5>FFT-Tipps</h5><p>Verwenden Sie DC-Kopplung, zentrieren Sie das Signal, nutzen Sie Mittelwert-Erfassung.</p></div>
+</div>
+
+<h4>Logische Operationen</h4>
+<ul>
+<li><strong>A&&B:</strong> UND-Verknuepfung</li>
+<li><strong>A||B:</strong> ODER-Verknuepfung</li>
+<li><strong>A^B:</strong> Exklusiv-ODER</li>
+<li><strong>!A:</strong> NICHT (Invertierung)</li>
+</ul>
+
+<h4>Weitere Funktionen</h4>
+<ul>
+<li><strong>Intg:</strong> Integral</li>
+<li><strong>Diff:</strong> Differential</li>
+<li><strong>Sqrt:</strong> Quadratwurzel</li>
+<li><strong>Lg:</strong> Dekadischer Logarithmus</li>
+<li><strong>Ln:</strong> Natuerlicher Logarithmus</li>
+<li><strong>Exp:</strong> Exponential</li>
+<li><strong>Abs:</strong> Absolutbetrag</li>
+<li><strong>Filter:</strong> Low/High/Band Pass/Stop</li>
+</ul>
+
+<h3>Automatische Messungen</h3>
+<p>37 Messparameter verfuegbar.</p>
+<p><strong>Bedienung:</strong> <kbd>Measure</kbd> dann Parameter waehlen</p>
+
+<h4>Zeitparameter (20)</h4>
+<ul>
+<li>Periodendauer, Frequenz</li>
+<li>Anstiegszeit, Abfallzeit</li>
+<li>+Impulsbreite, -Impulsbreite</li>
+<li>+Tastverhaeltnis, -Tastverhaeltnis</li>
+<li>tVmax, tVmin</li>
+<li>+Pulse Count, -Pulse Count</li>
+<li>+Flanken Count, -Flanken Count</li>
+<li>Verzoegerungen (Flanke-Flanke)</li>
+<li>Phasenwinkel</li>
+</ul>
+
+<h4>Spannungsparameter (17)</h4>
+<ul>
+<li>Vmax, Vmin, Vpp, Vtop, Vbase</li>
+<li>Vamplitude, Vavg, Vrms</li>
+<li>Ueberschwingen (pos/neg)</li>
+<li>Varianz, Preshoot</li>
+</ul>
+
+<h3>Frequenzzaehler</h3>
+<p>Hardware-Frequenzzaehler fuer praezise Messungen.</p>
+<p><strong>Bedienung:</strong> <kbd>Measure</kbd> dann <code>Zaehler</code> aktivieren</p>
+<p>Genauigkeit: 6-stellig</p>
+
+<h3>Messeinstellungen</h3>
+<p><strong>Bedienung:</strong> <kbd>Measure</kbd> dann <code>Einstellen</code></p>
+<ul>
+<li><strong>Quelle:</strong> Messkanal waehlen</li>
+<li><strong>Region:</strong> Messbereich (Bildschirm oder Cursor)</li>
+<li><strong>Schwellen:</strong> Obere/mittlere/untere Schwelle (Standard: 90%/50%/10%)</li>
+</ul>
+
+<h3>Statistik-Funktion</h3>
+<p>Zeigt Aktualwert, Mittelwert, Min, Max und Standardabweichung.</p>
+<p><strong>Bedienung:</strong> <kbd>Measure</kbd> dann <code>Statistik</code></p>
+
+<h3>Cursor-Messungen</h3>
+<p><strong>Bedienung:</strong> <kbd>Cursor</kbd></p>
+
+<h4>Manueller Modus</h4>
+<p>Zwei horizontale oder vertikale Cursor manuell positionieren.</p>
+<ul>
+<li>Zeitdifferenz und Frequenz messen</li>
+<li>Spannungsdifferenz messen</li>
+</ul>
+
+<h4>Nachlauf-Modus (Track)</h4>
+<p>Cursor folgen automatisch dem Signal.</p>
+<ul>
+<li>Zeit- und Spannungswerte an Cursorposition</li>
+<li>Zwei unabhaengige Cursor moeglich</li>
+</ul>
+
+<h4>Auto-Modus</h4>
+<p>Cursor werden automatisch bei automatischen Messungen positioniert.</p>
+</section>
+
+<!-- Kapitel 7: Protokoll-Dekodierung -->
+<section class="section" id="kap7">
+<div class="section-head">
+<div class="section-num">7</div>
+<div class="section-title"><h2>Dekodierung Protokolle</h2><p>Parallele und serielle Busdekodierung</p></div>
+</div>
+
+<h3>Parallel-Dekodierung</h3>
+<p>Dekodiert parallele Busse mit mehreren Datenleitungen.</p>
+<p><strong>Bedienung:</strong> <kbd>MATH</kbd> dann <code>Decode1</code> oder <code>Decode2</code></p>
+
+<h4>Einstellungen</h4>
+<ul>
+<li><strong>CLK:</strong> Taktquelle waehlen</li>
+<li><strong>Edge:</strong> Taktflanke (steigend/fallend)</li>
+<li><strong>Bus Width:</strong> Busbreite (1-2 Bits)</li>
+<li><strong>Bit X:</strong> Kanal fuer jedes Bit zuweisen</li>
+<li><strong>Format:</strong> Hex, Dezimal, Binaer, ASCII</li>
+</ul>
+
+<h3>RS232-Dekodierung (Option)</h3>
+<p>Dekodiert serielle RS232/UART Kommunikation.</p>
+
+<h4>Einstellungen</h4>
+<ul>
+<li><strong>TX/RX:</strong> Sende-/Empfangskanal</li>
+<li><strong>Baud:</strong> Baudrate (300 bis 2M)</li>
+<li><strong>Data Bits:</strong> 5, 6, 7 oder 8</li>
+<li><strong>Stop Bit:</strong> 1 oder 2</li>
+<li><strong>Parity:</strong> None, Odd, Even</li>
+<li><strong>Order:</strong> LSB oder MSB first</li>
+<li><strong>Polarity:</strong> Normal oder invertiert</li>
+</ul>
+
+<h4>Fehleranzeigen</h4>
+<ul>
+<li>Parity Error: P?</li>
+<li>Frame Error: F?</li>
+</ul>
+
+<h3>I2C-Dekodierung (Option)</h3>
+<p>Dekodiert I2C (Inter-Integrated Circuit) Bus.</p>
+
+<h4>Einstellungen</h4>
+<ul>
+<li><strong>CLK:</strong> Clock-Leitung</li>
+<li><strong>DATA:</strong> Daten-Leitung</li>
+<li><strong>Address Mode:</strong> Normal (7-Bit) oder Extended (10-Bit)</li>
+</ul>
+
+<h4>Interpretation</h4>
+<ul>
+<li>Start/Stop/Restart Bedingungen</li>
+<li>Adresse mit R/W Bit</li>
+<li>Datenbytes mit ACK/NACK</li>
+</ul>
+
+<h3>SPI-Dekodierung (Option)</h3>
+<p>Dekodiert SPI (Serial Peripheral Interface) Bus.</p>
+
+<h4>Einstellungen</h4>
+<ul>
+<li><strong>CLK:</strong> Clock-Leitung</li>
+<li><strong>MISO:</strong> Master In Slave Out</li>
+<li><strong>MOSI:</strong> Master Out Slave In</li>
+<li><strong>Mode:</strong> CS (Chip Select) oder Timeout</li>
+<li><strong>Edge:</strong> Taktflanke</li>
+<li><strong>Polarity:</strong> Daten-Polaritaet</li>
+<li><strong>Width:</strong> Datenbreite (4-32 Bits)</li>
+<li><strong>Order:</strong> MSB oder LSB first</li>
+</ul>
+
+<h3>Dekodierungs-Anzeige</h3>
+<ul>
+<li><strong>Label:</strong> Bus-Beschriftung</li>
+<li><strong>Line:</strong> Dekodierlinie</li>
+<li><strong>Format:</strong> Anzeigeformat</li>
+<li><strong>Endian:</strong> Byte-Reihenfolge</li>
+<li><strong>Width:</strong> Busbreiten-Anzeige</li>
+</ul>
+</section>
+
+<!-- Kapitel 8: Referenz-Signalform -->
+<section class="section" id="kap8">
+<div class="section-head">
+<div class="section-num">8</div>
+<div class="section-title"><h2>Referenz-Signalform</h2><p>Vergleich mit Referenzsignalen</p></div>
+</div>
+
+<h3>Referenz-Funktion aktivieren</h3>
+<p><strong>Bedienung:</strong> <kbd>REF</kbd></p>
+
+<h4>Einstellungen</h4>
+<ul>
+<li><strong>Quelle:</strong> Signal fuer Referenz waehlen (CH1, CH2, MATH)</li>
+<li><strong>Offset:</strong> Vertikale Position anpassen</li>
+<li><strong>Scale:</strong> Vertikale Skalierung</li>
+<li><strong>Farbe:</strong> Referenzfarbe waehlen</li>
+</ul>
+
+<h3>Referenzsignal speichern</h3>
+<p>Speichert aktuelles Signal als Referenz im internen Speicher.</p>
+<p><strong>Bedienung:</strong> <code>Speichern</code></p>
+
+<h3>Referenzsignal exportieren</h3>
+<p>Exportiert Referenz auf USB-Speicher oder internen Speicher.</p>
+<p><strong>Bedienung:</strong> <code>Export</code></p>
+
+<h3>Referenzsignal importieren</h3>
+<p>Laedt gespeichertes Referenzsignal.</p>
+<p><strong>Bedienung:</strong> <code>Import</code></p>
+
+<h3>Referenzsignal zuruecksetzen</h3>
+<p>Setzt Referenz auf Standardwerte zurueck.</p>
+<p><strong>Bedienung:</strong> <code>Reset</code></p>
+</section>
+
+<!-- Kapitel 9: Pass/Fail Test -->
+<section class="section" id="kap9">
+<div class="section-head">
+<div class="section-num">9</div>
+<div class="section-title"><h2>Gueligkeitstest (Pass/Fail)</h2><p>Automatische Signalpruefung</p></div>
+</div>
+
+<p>Der Pass/Fail Test vergleicht das Eingangssignal mit einer definierten Maske.</p>
+
+<h3>Test aktivieren</h3>
+<p><strong>Bedienung:</strong> <kbd>Utility</kbd> dann <code>Pass/Fail</code> dann <code>Enable Test</code></p>
+
+<h3>Signalquelle einstellen</h3>
+<p>Waehlen Sie den zu pruefenden Kanal.</p>
+<p><strong>Bedienung:</strong> <code>Source</code> dann Kanal waehlen</p>
+
+<h3>Pruef-Maske einstellen</h3>
+<h4>Region (Bereich)</h4>
+<ul>
+<li><strong>Screen:</strong> Gesamter Bildschirm</li>
+<li><strong>Cursor:</strong> Zwischen Cursor A und B</li>
+</ul>
+
+<h4>Maskengrenzen</h4>
+<ul>
+<li><strong>X Mask:</strong> Horizontale Toleranz (in div)</li>
+<li><strong>Y Mask:</strong> Vertikale Toleranz (in div)</li>
+</ul>
+
+<h4>Maske erstellen</h4>
+<p><code>Create</code> erstellt Maske basierend auf aktuellem Signal und Toleranzen.</p>
+
+<h3>Ausgabe-Modus</h3>
+<h4>Operate</h4>
+<ul>
+<li><strong>Run:</strong> Test laeuft</li>
+<li><strong>Stop:</strong> Test gestoppt</li>
+</ul>
+
+<h4>Output</h4>
+<ul>
+<li><strong>Fail:</strong> Ausgabe bei Fail</li>
+<li><strong>Pass:</strong> Ausgabe bei Pass</li>
+</ul>
+
+<h4>Stop On Fail</h4>
+<p>Stoppt automatisch bei Fail-Ergebnis.</p>
+
+<h4>Aux Out</h4>
+<p>Ausgabe ueber BNC-Anschluss auf Rueckseite.</p>
+
+<h3>Statistik</h3>
+<p>Zeigt Anzahl Pass, Fail und Total.</p>
+
+<h3>Maske speichern/laden</h3>
+<p>Masken koennen intern oder extern gespeichert werden.</p>
+</section>
+
+<!-- Kapitel 10: Signalaufzeichnung -->
+<section class="section" id="kap10">
+<div class="section-head">
+<div class="section-num">10</div>
+<div class="section-title"><h2>Signalaufzeichnung</h2><p>Echtzeit-Aufnahme und Wiedergabe</p></div>
+</div>
+
+<p>Zeichnet Signale in Echtzeit auf und ermoeglicht spaetere Wiedergabe.</p>
+<p><strong>Bedienung:</strong> <kbd>Utility</kbd> dann <code>Record</code></p>
+
+<h3>Wiedergabe-Einstellungen</h3>
+<h4>Mode</h4>
+<ul>
+<li><strong>Record:</strong> Aufnahme-Modus</li>
+<li><strong>Playback:</strong> Wiedergabe-Modus</li>
+</ul>
+
+<h4>Playback-Optionen</h4>
+<ul>
+<li><strong>Play:</strong> Wiedergabe starten/stoppen</li>
+<li><strong>Operate:</strong> Zyklisch oder einmalig</li>
+<li><strong>Interval:</strong> Zeit zwischen Frames</li>
+<li><strong>Current Frame:</strong> Aktueller Frame</li>
+</ul>
+
+<h3>Aufnahme-Einstellungen</h3>
+<ul>
+<li><strong>Source:</strong> Aufnahmequelle</li>
+<li><strong>End Frame:</strong> Maximale Frameanzahl (bis 60.000 optional)</li>
+<li><strong>Interval:</strong> Aufnahmeintervall</li>
+</ul>
+
+<div class="info tip">
+<span class="info-icon">&#128161;</span>
+<div><h5>Anwendung</h5><p>Ideal fuer sporadisch auftretende Signale oder lange Ueberwachungsphasen.</p></div>
+</div>
+</section>
+
+<!-- Kapitel 11: Displayeinstellungen -->
+<section class="section" id="kap11">
+<div class="section-head">
+<div class="section-num">11</div>
+<div class="section-title"><h2>Displayeinstellungen</h2><p>Anzeige und Darstellung anpassen</p></div>
+</div>
+
+<p><strong>Bedienung:</strong> <kbd>Display</kbd></p>
+
+<h3>Anzeigeart</h3>
+<h4>Vector (Interpolation)</h4>
+<p>Verbindet Abtastpunkte mit Linien. Besser fuer analoge Signale.</p>
+
+<h4>Dots (Punkte)</h4>
+<p>Zeigt nur Abtastpunkte. Besser fuer digitale Signale.</p>
+
+<h3>Nachleuchtzeit (Persistence)</h3>
+<p>Wie lange Signale auf dem Bildschirm sichtbar bleiben.</p>
+<ul>
+<li><strong>Min:</strong> Minimale Nachleuchtzeit</li>
+<li><strong>Definiert:</strong> 100ms bis 10s</li>
+<li><strong>Infinite:</strong> Unbegrenzt (alle Erfassungen sichtbar)</li>
+</ul>
+
+<div class="info tip">
+<span class="info-icon">&#128161;</span>
+<div><h5>Anwendung Infinite</h5><p>Ideal zum Erkennen von seltenen Ereignissen oder Signalvariationen.</p></div>
+</div>
+
+<h3>Signalhelligkeit</h3>
+<p>Einstellbereich: 0% bis 100%</p>
+<p>Standard: 60%</p>
+
+<h3>Rasterart</h3>
+<ul>
+<li><strong>Full:</strong> Vollstaendiges Raster</li>
+<li><strong>Half:</strong> Nur Mittelpunkt und Rahmen</li>
+<li><strong>None:</strong> Kein Raster</li>
+</ul>
+
+<h3>Rasterhelligkeit</h3>
+<p>Einstellbereich: 0% bis 100%</p>
+
+<h3>Menu Display Time</h3>
+<p>Zeit bis Menues automatisch ausgeblendet werden.</p>
+<ul>
+<li>1s, 2s, 5s, 10s, 20s</li>
+<li>Infinite: Nie ausblenden</li>
+</ul>
+</section>
+
+<!-- Kapitel 12: Speichern und Abrufen -->
+<section class="section" id="kap12">
+<div class="section-head">
+<div class="section-num">12</div>
+<div class="section-title"><h2>Speichern und Abrufen</h2><p>Dateiverwaltung und Speicheroptionen</p></div>
+</div>
+
+<p><strong>Bedienung:</strong> <kbd>Storage</kbd></p>
+
+<h3>Speicher-Typen</h3>
+<div class="tbl"><table>
+<tr><th>Typ</th><th>Beschreibung</th><th>Format</th></tr>
+<tr><td><strong>Picture</strong></td><td>Screenshot</td><td>.png, .bmp, .jpg</td></tr>
+<tr><td><strong>Trace</strong></td><td>Signaldaten (intern)</td><td>.trc</td></tr>
+<tr><td><strong>Waves</strong></td><td>Signaldaten (extern)</td><td>.wfm</td></tr>
+<tr><td><strong>Setups</strong></td><td>Geraeteeinstellungen</td><td>.stp</td></tr>
+<tr><td><strong>CSV</strong></td><td>Tabellendaten</td><td>.csv</td></tr>
+<tr><td><strong>Param</strong></td><td>Messparameter</td><td>.txt</td></tr>
+</table></div>
+
+<h3>Intern Speichern</h3>
+<p>10 interne Speicherplaetze fuer Setups und Traces.</p>
+<ol class="steps">
+<li><h5>Speichertyp waehlen</h5><p><code>StorType</code></p></li>
+<li><h5>Intern waehlen</h5><p><code>Intern</code></p></li>
+<li><h5>Speicherplatz waehlen</h5><p>1-10</p></li>
+<li><h5>Speichern</h5><p><code>Speichern</code></p></li>
+</ol>
+
+<h3>Extern Speichern (USB)</h3>
+<ol class="steps">
+<li><h5>USB-Speicher anschliessen</h5><p>FAT32 formatiert</p></li>
+<li><h5>Speichertyp waehlen</h5><p><code>StorType</code></p></li>
+<li><h5>Extern waehlen</h5><p><code>Extern</code></p></li>
+<li><h5>Dateiname eingeben</h5><p>Optional</p></li>
+<li><h5>Speichern</h5><p><code>Speichern</code></p></li>
+</ol>
+
+<h3>Datentraegerverwaltung</h3>
+<p><strong>Bedienung:</strong> <code>Disk Manager</code></p>
+
+<h4>Funktionen</h4>
+<ul>
+<li><strong>New File/Folder:</strong> Neue Datei/Ordner erstellen</li>
+<li><strong>Delete:</strong> Datei/Ordner loeschen</li>
+<li><strong>Rename:</strong> Umbenennen</li>
+<li><strong>Copy:</strong> Kopieren</li>
+<li><strong>Paste:</strong> Einfuegen</li>
+</ul>
+
+<h3>Werkseinstellungen</h3>
+<p><strong>Bedienung:</strong> <kbd>Storage</kbd> dann <code>Default</code></p>
+<p>Setzt alle Einstellungen auf Standardwerte zurueck.</p>
+
+<div class="info warn">
+<span class="info-icon">&#9888;</span>
+<div><h5>Achtung</h5><p>Gespeicherte Einstellungen bleiben erhalten, nur aktuelle Einstellungen werden zurueckgesetzt.</p></div>
+</div>
+</section>
+
+<!-- Kapitel 13: Systemfunktionen -->
+<section class="section" id="kap13">
+<div class="section-head">
+<div class="section-num">13</div>
+<div class="section-title"><h2>Einstellung Systemfunktionen</h2><p>Schnittstellen und Systemeinstellungen</p></div>
+</div>
+
+<p><strong>Bedienung:</strong> <kbd>Utility</kbd></p>
+
+<h3>LAN Einstellungen</h3>
+<p><strong>Bedienung:</strong> <code>EA Einstell</code> dann <code>LAN Einstell</code></p>
+
+<h4>IP-Konfiguration</h4>
+<div class="tbl"><table>
+<tr><th>Modus</th><th>Beschreibung</th></tr>
+<tr><td><strong>DHCP</strong></td><td>Automatische IP vom Server</td></tr>
+<tr><td><strong>Auto IP</strong></td><td>Automatische IP (169.254.x.x)</td></tr>
+<tr><td><strong>Static IP</strong></td><td>Manuelle IP-Konfiguration</td></tr>
+</table></div>
+
+<h4>Netzwerkparameter</h4>
+<ul>
+<li><strong>IP Address:</strong> Geraete-IP</li>
+<li><strong>Subnet Mask:</strong> Subnetzmaske</li>
+<li><strong>Gateway:</strong> Standard-Gateway</li>
+<li><strong>DNS:</strong> Domain Name Server</li>
+</ul>
+
+<h3>USB-Geraet Einstellungen</h3>
+<ul>
+<li><strong>Computer:</strong> Verbindung mit PC (USBTMC)</li>
+<li><strong>PictBridge:</strong> Verbindung mit Drucker</li>
+</ul>
+
+<h3>Systembezogene Einstellungen</h3>
+
+<h4>Signal Ton (Beeper)</h4>
+<p>Tastentöne ein-/ausschalten.</p>
+
+<h4>Sprache (Language)</h4>
+<p>Systemsprache waehlen (Deutsch, Englisch, etc.).</p>
+
+<h4>System Informationen</h4>
+<p>Zeigt Modell, Seriennummer, Software-Version.</p>
+
+<h4>Vertikale Referenz</h4>
+<ul>
+<li><strong>Ground:</strong> Referenz ist Signalmasse</li>
+<li><strong>Center:</strong> Referenz ist Bildschirmmitte</li>
+</ul>
+
+<h4>Power-on Recall</h4>
+<ul>
+<li><strong>Last:</strong> Letzte Einstellungen laden</li>
+<li><strong>Default:</strong> Standardeinstellungen laden</li>
+</ul>
+
+<h4>Selbst-Kalibrierung</h4>
+<p>Interne Kalibrierung durchfuehren.</p>
+<div class="info warn">
+<span class="info-icon">&#9888;</span>
+<div><h5>Voraussetzung</h5><p>Geraet mindestens 30 Minuten aufwaermen, alle Kabel entfernen.</p></div>
+</div>
+
+<h4>Druckereinstellung</h4>
+<ul>
+<li><strong>Invert:</strong> Farben invertieren</li>
+<li><strong>Palette:</strong> Farbpalette</li>
+<li><strong>Copies:</strong> Anzahl Kopien</li>
+</ul>
+
+<h4>Hilfsausgang (Aux Out)</h4>
+<ul>
+<li><strong>TrigOut:</strong> Triggersignal ausgeben</li>
+<li><strong>PassFail:</strong> Pass/Fail Signal ausgeben</li>
+</ul>
+
+<h4>Optionen verwalten</h4>
+<p>Lizenzierte Optionen aktivieren/anzeigen.</p>
+
+<h4>Tastensperre</h4>
+<p>Bedienfeld sperren/entsperren.</p>
+</section>
+
+<!-- Kapitel 14: Fernsteuerung -->
+<section class="section" id="kap14">
+<div class="section-head">
+<div class="section-num">14</div>
+<div class="section-title"><h2>Fernsteuerung</h2><p>Remote-Zugriff ueber USB und LAN</p></div>
+</div>
+
+<h3>Fernsteuerung ueber USB</h3>
+<ol class="steps">
+<li><h5>Verbindung herstellen</h5><p>USB-Kabel mit PC verbinden</p></li>
+<li><h5>Treiber installieren</h5><p>RIGOL USB Treiber oder NI-VISA</p></li>
+<li><h5>Software starten</h5><p>Ultra Sigma oder eigene Software</p></li>
+<li><h5>Geraet suchen</h5><p>USB-Ressource finden</p></li>
+</ol>
+
+<h3>Fernsteuerung ueber LAN</h3>
+<ol class="steps">
+<li><h5>LAN verbinden</h5><p>Netzwerkkabel anschliessen</p></li>
+<li><h5>IP konfigurieren</h5><p>DHCP oder statische IP</p></li>
+<li><h5>VISA-Adresse</h5><p>TCPIP::IP-Adresse::INSTR</p></li>
+<li><h5>Verbindung testen</h5><p>Web-Interface oder Software</p></li>
+</ol>
+
+<h3>Web-Interface</h3>
+<p>IP-Adresse im Browser eingeben fuer:</p>
+<ul>
+<li>Geraeteinformationen</li>
+<li>Netzwerkkonfiguration</li>
+<li>Bildschirm-Snapshot</li>
+</ul>
+
+<h3>SCPI-Befehle</h3>
+<p>Das Oszilloskop unterstuetzt Standard Commands for Programmable Instruments (SCPI).</p>
+<p>Dokumentation siehe separates Programmierhandbuch.</p>
+</section>
+
+<!-- Kapitel 15: Fehlersuche -->
+<section class="section" id="kap15">
+<div class="section-head">
+<div class="section-num">15</div>
+<div class="section-title"><h2>Fehlersuche</h2><p>Haeufige Probleme und Loesungen</p></div>
+</div>
+
+<h3>Oszilloskop laesst sich nicht einschalten</h3>
+<ul>
+<li>Netzkabel pruefen</li>
+<li>Netzspannung pruefen (100-240V)</li>
+<li>Sicherung pruefen (250V, T2A)</li>
+<li>Power-Taste druecken</li>
+</ul>
+
+<h3>Kein Signal auf dem Bildschirm</h3>
+<ul>
+<li>Tastkopf angeschlossen?</li>
+<li>Kanal aktiviert?</li>
+<li>Vertikalskalierung passend?</li>
+<li>Trigger-Einstellungen pruefen</li>
+<li>Kopplung pruefen (nicht auf GND)</li>
+</ul>
+
+<h3>Signal instabil</h3>
+<ul>
+<li>Triggerquelle korrekt?</li>
+<li>Triggerpegel anpassen</li>
+<li>Triggermodus pruefen</li>
+<li>Holdoff einstellen</li>
+<li>Bandbreitenbegrenzung versuchen</li>
+</ul>
+
+<h3>AUTO findet Signal nicht</h3>
+<ul>
+<li>Frequenz groesser 50 Hz?</li>
+<li>Amplitude groesser 20 mVpp?</li>
+<li>Tastverhaeltnis groesser 1%?</li>
+</ul>
+
+<h3>USB-Geraet wird nicht erkannt</h3>
+<ul>
+<li>FAT32 formatiert?</li>
+<li>USB-Stick defekt?</li>
+<li>Anderen USB-Port versuchen</li>
+</ul>
+
+<h3>Messwerte falsch</h3>
+<ul>
+<li>Tastkopfabschwaechung korrekt eingestellt?</li>
+<li>Tastkopf kalibriert?</li>
+<li>Selbstkalibrierung durchfuehren</li>
+</ul>
+</section>
+
+<!-- Kapitel 16: Technische Daten -->
+<section class="section" id="kap16">
+<div class="section-head">
+<div class="section-num">16</div>
+<div class="section-title"><h2>Technische Daten</h2><p>Spezifikationen der DS1000Z-E Serie</p></div>
+</div>
+
+<h3>Akquisitionssystem</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>DS1102Z-E</th><th>DS1202Z-E</th></tr>
+<tr><td>Bandbreite</td><td>100 MHz</td><td>200 MHz</td></tr>
+<tr><td>Kanaele</td><td colspan="2">2 analog</td></tr>
+<tr><td>Abtastrate</td><td colspan="2">1 GSa/s</td></tr>
+<tr><td>Speichertiefe</td><td colspan="2">24 Mpts</td></tr>
+<tr><td>Signalerfassungsrate</td><td colspan="2">30.000 wfms/s</td></tr>
+</table></div>
+
+<h3>Vertikalsystem</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>Wert</th></tr>
+<tr><td>Eingangsimpedanz</td><td>1 MOhm || 15-18 pF</td></tr>
+<tr><td>Eingangskopplung</td><td>DC, AC, GND</td></tr>
+<tr><td>Vertikalskalierung</td><td>1 mV/div bis 10 V/div</td></tr>
+<tr><td>Max. Eingangsspannung</td><td>300 Vrms CAT I</td></tr>
+<tr><td>DC-Genauigkeit</td><td>plus/minus 3%</td></tr>
+</table></div>
+
+<h3>Horizontalsystem</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>Wert</th></tr>
+<tr><td>Zeitbasis</td><td>2 ns/div bis 50 s/div</td></tr>
+<tr><td>Zeitbasis-Genauigkeit</td><td>plus/minus 50 ppm</td></tr>
+<tr><td>Interpolation</td><td>Sin(x)/x</td></tr>
+</table></div>
+
+<h3>Triggersystem</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>Wert</th></tr>
+<tr><td>Triggerquellen</td><td>CH1, CH2, EXT, AC Line</td></tr>
+<tr><td>Triggermodi</td><td>Auto, Normal, Single</td></tr>
+<tr><td>Triggerarten</td><td>15 Typen</td></tr>
+<tr><td>Ext. Trigger Bereich</td><td>plus/minus 2.4 V</td></tr>
+<tr><td>Holdoff Bereich</td><td>100 ns bis 10 s</td></tr>
+</table></div>
+
+<h3>Messungen</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>Wert</th></tr>
+<tr><td>Automatische Messungen</td><td>37 Parameter</td></tr>
+<tr><td>Cursor-Messungen</td><td>Manual, Track, Auto</td></tr>
+<tr><td>Frequenzzaehler</td><td>6-stellig</td></tr>
+</table></div>
+
+<h3>Display</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>Wert</th></tr>
+<tr><td>Groesse</td><td>7.0 Zoll</td></tr>
+<tr><td>Aufloesung</td><td>800 x 480 (WVGA)</td></tr>
+<tr><td>Farben</td><td>160.000</td></tr>
+<tr><td>Typ</td><td>TFT LCD</td></tr>
+</table></div>
+
+<h3>Schnittstellen</h3>
+<ul>
+<li>USB Host: USB 2.0 (Typ A)</li>
+<li>USB Device: USB 2.0 (Typ B)</li>
+<li>LAN: RJ45, 10/100 Mbit</li>
+<li>Aux Out: BNC</li>
+<li>Ext Trigger: BNC</li>
+</ul>
+
+<h3>Allgemein</h3>
+<div class="tbl"><table>
+<tr><th>Parameter</th><th>Wert</th></tr>
+<tr><td>Stromversorgung</td><td>100-240 VAC, 45-440 Hz</td></tr>
+<tr><td>Leistungsaufnahme</td><td>max. 30 W</td></tr>
+<tr><td>Abmessungen</td><td>313 x 161 x 122 mm</td></tr>
+<tr><td>Gewicht</td><td>ca. 3.2 kg</td></tr>
+</table></div>
+</section>
+
+<!-- Zubehoer -->
+<section class="section" id="zubehoer">
+<div class="section-head">
+<div class="section-num">&#128230;</div>
+<div class="section-title"><h2>Zubehoer und Optionen</h2><p>Erweiterungen und Zubehoer</p></div>
+</div>
+
+<h3>Mitgeliefertes Zubehoer</h3>
+<ul>
+<li>2x Passive Tastkopfe RP3300 (350 MHz)</li>
+<li>Netzkabel</li>
+<li>USB-Kabel</li>
+<li>Kurzanleitung</li>
+</ul>
+
+<h3>Optionales Zubehoer</h3>
+<div class="tbl"><table>
+<tr><th>Artikel</th><th>Beschreibung</th></tr>
+<tr><td>RP3500A</td><td>500 MHz passive Tastkopfe</td></tr>
+<tr><td>RP7150</td><td>1.5 GHz aktive Tastkopfe</td></tr>
+<tr><td>PLA2216</td><td>16-Kanal Logic Analyzer</td></tr>
+</table></div>
+
+<h3>Software-Optionen</h3>
+<div class="tbl"><table>
+<tr><th>Option</th><th>Beschreibung</th></tr>
+<tr><td>DS1000Z-RLM</td><td>Signalaufzeichnung (60.000 Frames)</td></tr>
+<tr><td>DS1000Z-AT</td><td>Erweiterte Trigger-Optionen</td></tr>
+<tr><td>DS1000Z-SER</td><td>RS232/I2C/SPI Dekodierung</td></tr>
+</table></div>
+
+<h3>Gewaehrleistung</h3>
+<p>RIGOL gewaehrt fuer dieses Produkt eine Gewaehrleistung von 3 Jahren ab Kaufdatum.</p>
+<p>Die Gewaehrleistung deckt Material- und Herstellungsfehler ab.</p>
+<p>Nicht abgedeckt: Verschleissteile, Schaeden durch unsachgemaesse Handhabung.</p>
+</section>
+
+</main>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<script>
+// Navigation active state
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+
+function updateNav() {
+    let current = '';
+    sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (scrollY >= top) current = section.id;
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Progress bar
+function updateProgress() {
+    const winScroll = document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('prog').style.width = scrolled + '%';
+}
+
+// Back to top button
+function updateBackTop() {
+    const btn = document.getElementById('backTop');
+    if (window.scrollY > 300) {
+        btn.classList.add('show');
+    } else {
+        btn.classList.remove('show');
+    }
+}
+
+// Mobile menu toggle
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('active');
+}
+
+// Close sidebar when clicking a link on mobile
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 1024) {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('active');
+        }
+    });
+});
+
+// Scroll events
+window.addEventListener('scroll', () => {
+    updateNav();
+    updateProgress();
+    updateBackTop();
+});
+
+// Search functionality
+const searchData = [];
+sections.forEach(section => {
+    const title = section.querySelector('h2');
+    const subtitle = section.querySelector('.section-title p');
+    if (title) {
+        searchData.push({
+            id: section.id,
+            title: title.textContent,
+            subtitle: subtitle ? subtitle.textContent : '',
+            content: section.textContent.substring(0, 300)
+        });
+    }
+    
+    // Also index h3 headings
+    section.querySelectorAll('h3').forEach(h3 => {
+        searchData.push({
+            id: section.id,
+            title: h3.textContent,
+            subtitle: title ? title.textContent : '',
+            content: ''
+        });
+    });
+});
+
+function doSearch(query) {
+    const resultsDiv = document.getElementById('searchRes');
+    if (!query || query.length < 2) {
+        resultsDiv.classList.remove('active');
+        return;
+    }
+    
+    const q = query.toLowerCase();
+    const results = searchData.filter(item => 
+        item.title.toLowerCase().includes(q) || 
+        item.subtitle.toLowerCase().includes(q) ||
+        item.content.toLowerCase().includes(q)
+    ).slice(0, 10);
+    
+    if (results.length === 0) {
+        resultsDiv.innerHTML = '<div class="search-item"><p>Keine Ergebnisse gefunden</p></div>';
+    } else {
+        resultsDiv.innerHTML = results.map(r => 
+            '<div class="search-item" onclick="goTo(\'' + r.id + '\')">' +
+            '<h4>' + r.title + '</h4>' +
+            '<p>' + r.subtitle + '</p>' +
+            '</div>'
+        ).join('');
+    }
+    resultsDiv.classList.add('active');
+}
+
+function goTo(id) {
+    document.getElementById(id).scrollIntoView({behavior: 'smooth'});
+    document.getElementById('searchRes').classList.remove('active');
+    document.getElementById('search').value = '';
+}
+
+// Close search on click outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-box')) {
+        document.getElementById('searchRes').classList.remove('active');
+    }
+});
+
+// Initial updates
+updateNav();
+updateProgress();
+</script>
+</body>
+</html>
